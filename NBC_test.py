@@ -29,10 +29,10 @@ class Training_set:
 		self.i=i
 		self.training=training
 
-with open("F:\Workspaces\Python\Stock Price Application\Articles/all_sentences_shuffled.pickle", 'rb') as handle:
+with open("./all_sentences_shuffled.pickle", 'rb') as handle:
 	all_sentences=pickle.load(handle)
 
-with open("F:\Workspaces\Python\Stock Price Application\Articles/training_set.pickle", 'rb') as handle:
+with open("./training_set.pickle", 'rb') as handle:
 	training_set_obj=pickle.load(handle)
 
 i=training_set_obj.i
@@ -109,7 +109,7 @@ def NBclassify_Ngrams(training, classes_grams, classes_len, sentence, N):
 	vocab_sizes={}	
 	for n in vocabs:
 		vocab_sizes[n]=len(vocabs[n])
-		print vocab_sizes[n]
+		# print vocab_sizes[n]
 
 
 	priors={}
@@ -142,7 +142,9 @@ def NBclassify_Ngrams(training, classes_grams, classes_len, sentence, N):
 	list_of_classes={0:"Irrelevant", 1:"Very bad", 2:"Bad", 3:"Neutral", 4:"Good", 5:"Very Good"}
 	print "selected_class: %s"%selected_class, list_of_classes[selected_class]
 
-	
+	print "\nWas this the right class?"
+	correct_class=int(raw_input("\nEnter what you think was the right category:\n>"))
+
 
 
 '''
