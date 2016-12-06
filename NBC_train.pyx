@@ -1,22 +1,16 @@
 #Naive Bayes classifier.
 
 #This classifier is trained on sentences which are tagged as very good, good, neutral, bad and very bad.
-#Along with these class tags, also tagged are the words which are used to make this decision. 
+#Along with these class tags, also tagged are the words which are used to make this decision.
 
 import pickle
 import nltk
-from article_manip import Article
-from article_manip import make_sentences
+from article_manip import ArticleObject
+
 from random import shuffle
 from collections import defaultdict
-'''
-all_sentences=[]
-all_sentences+=make_sentences('Infosys')
-all_sentences+=make_sentences('Yes Bank')
-with open("F:\Workspaces\Python\Stock Price Application\Articles/all_sentences.pickle", 'wb') as handle:
-	pickle.dump(all_sentences,handle)
-'''
-with open("F:\Workspaces\Python\Stock Price Application\Articles/all_sentences_shuffled.pickle", 'rb') as handle:
+
+with open("./all_sentences_shuffled.pickle", 'rb') as handle:
 	all_sentences=pickle.load(handle)
 
 class Training_set:
@@ -25,7 +19,7 @@ class Training_set:
 		self.training=training
 
 
-with open("F:\Workspaces\Python\Stock Price Application\Articles/training_set.pickle", 'rb') as handle:
+with open("./training_set.pickle", 'rb') as handle:
 	training_set_obj=pickle.load(handle)
 
 i=training_set_obj.i
@@ -58,17 +52,15 @@ while i<len(all_sentences):
 				# print "rating:%s"%rating
 				training[rating].append(all_sentences[i])
 				i+=1
-		except Exception: 
+		except Exception:
 			rating=raw_input("\nSorry, that is not a valid input. Try again: ")
-	
+
 	if(i%10==0):
 		training_set_obj=Training_set(i,training)
-		with open("F:\Workspaces\Python\Stock Price Application\Articles/training_set.pickle", 'wb') as handle:
+		with open("./training_set.pickle", 'wb') as handle:
 			pickle.dump(training_set_obj,handle)
 		yorn=raw_input("\n\n\n\n\t\t<---EXIT?---> Y or N?\n\t\t>")
 		if yorn.lower()=='y':
 			# print training_set_obj.training
 			print "\nNumber of marked sentences: %s"%training_set_obj.i
 			exit()
-
-
